@@ -7559,8 +7559,29 @@ S_{\mathbb{E}}(p_{\theta},q)=\mathbb{E}_{q(\boldsymbol{x})} q(y|\boldsymbol{x}) 
 <h4 id="TODO:-Derive-the-NLL-loss-for-Gaussian-assumption."><strong>TODO</strong>: Derive the NLL loss for Gaussian assumption.<a class="anchor-link" href="#TODO:-Derive-the-NLL-loss-for-Gaussian-assumption.">¶</a></h4><p><strong>========================</strong></p>
 \begin{align}
 -\log p_{\theta}(y|\boldsymbol{x}) &amp;=  \tfrac{1}{2}\log\left(2\pi\, \sigma_{\theta}^2(\boldsymbol{x})\right) \\
-&amp;\quad+ \frac{\big(y-\mu_{\theta}(\boldsymbol{x})\big)^2}{2\sigma_{\theta}^2(\boldsymbol{x})}\n
+&amp;\quad+ \frac{\big(y-\mu_{\theta}(\boldsymbol{x})\big)^2}{2\sigma_{\theta}^2(\boldsymbol{x})}
 \end{align}
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Derivation-:">Derivation :<a class="anchor-link" href="#Derivation-:">¶</a></h3><p>Derivation of NLL for Gaussian Assumption
+<strong>Goal:</strong> Derive the Negative Log-Likelihood (NLL) loss function starting from the Gaussian PDF.</p>
+<p>We assume the predictive distribution $p_\theta(y|x)$ is a Gaussian distribution $\mathcal{N}(\mu_\theta(x), \sigma_\theta^2(x))$.
+The probability density function (PDF) is:
+$$p(y|x) = \frac{1}{\sqrt{2\pi\sigma_\theta^2(x)}} \exp\left( -\frac{(y - \mu_\theta(x))^2}{2\sigma_\theta^2(x)} \right)$$</p>
+<p>To obtain the NLL, we take the negative natural logarithm ($-\log$) of the PDF:
+$$-\log p(y|x) = -\log \left( \frac{1}{\sqrt{2\pi\sigma_\theta^2(x)}} \exp\left( -\frac{(y - \mu_\theta(x))^2}{2\sigma_\theta^2(x)} \right) \right)$$</p>
+<p>Using the logarithm rules $\log(ab) = \log(a) + \log(b)$ and $\log(a^k) = k\log(a)$:
+$$-\log p(y|x) = -\left[ \log((2\pi\sigma_\theta^2(x))^{-1/2}) + \log\left(\exp\left( -\frac{(y - \mu_\theta(x))^2}{2\sigma_\theta^2(x)} \right)\right) \right]$$</p>
+$$-\log p(y|x) = -\left[ -\frac{1}{2}\log(2\pi\sigma_\theta^2(x)) - \frac{(y - \mu_\theta(x))^2}{2\sigma_\theta^2(x)} \right]$$<p>Distributing the negative sign yields the final loss function:
+$$\mathcal{L}_{Gaussian} = \frac{1}{2}\log(2\pi\sigma_\theta^2(x)) + \frac{(y - \mu_\theta(x))^2}{2\sigma_\theta^2(x)}$$</p>
 </div>
 </div>
 </div>
@@ -7585,8 +7606,27 @@ S_{\mathbb{E}}(p_{\theta},q)=\mathbb{E}_{q(\boldsymbol{x})} q(y|\boldsymbol{x}) 
 <p><strong>========================</strong></p>
 <h4 id="TODO:-Derive-the-NLL-loss-for-Laplacian-assumption."><strong>TODO</strong>: Derive the NLL loss for Laplacian assumption.<a class="anchor-link" href="#TODO:-Derive-the-NLL-loss-for-Laplacian-assumption.">¶</a></h4><p><strong>========================</strong></p>
 \begin{align}
--\log p_{\theta}(y|\boldsymbol{x}) &amp;=  \log\left(2\sigma_{\theta}(\boldsymbol{x})\right) + \frac{|y-\mu_{\theta}(\boldsymbol{x})|}{\sigma_{\theta}(\boldsymbol{x})}\n
+-\log p_{\theta}(y|\boldsymbol{x}) &amp;=  \log\left(2\sigma_{\theta}(\boldsymbol{x})\right) + \frac{|y-\mu_{\theta}(\boldsymbol{x})|}{\sigma_{\theta}(\boldsymbol{x})}
 \end{align}
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Derivation-of-NLL-for-Laplacian-Assumption">Derivation of NLL for Laplacian Assumption<a class="anchor-link" href="#Derivation-of-NLL-for-Laplacian-Assumption">¶</a></h3><p><strong>Goal:</strong> Derive the Negative Log-Likelihood (NLL) loss function starting from the Laplacian PDF.</p>
+<p>We assume the predictive distribution $p_\theta(y|x)$ is a Laplacian distribution $\mathcal{L}(\mu_\theta(x), \sigma_\theta(x))$.
+The probability density function (PDF) is:
+$$p(y|x) = \frac{1}{2\sigma_\theta(x)} \exp\left( -\frac{|y - \mu_\theta(x)|}{\sigma_\theta(x)} \right)$$</p>
+<p>We take the negative natural logarithm:
+$$-\log p(y|x) = -\log \left( \frac{1}{2\sigma_\theta(x)} \exp\left( -\frac{|y - \mu_\theta(x)|}{\sigma_\theta(x)} \right) \right)$$</p>
+<p>Using logarithm rules:
+$$-\log p(y|x) = -\left[ \log((2\sigma_\theta(x))^{-1}) + \log\left(\exp\left( -\frac{|y - \mu_\theta(x)|}{\sigma_\theta(x)} \right)\right) \right]$$</p>
+$$-\log p(y|x) = -\left[ -\log(2\sigma_\theta(x)) - \frac{|y - \mu_\theta(x)|}{\sigma_\theta(x)} \right]$$
 </div>
 </div>
 </div>
@@ -8033,6 +8073,33 @@ final loss:  6.4121294
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>###########</p>
+<h3 id="1.-In-terms-of-regression,-compared-to-only-use-NLL-loss-with-a-single-network,-what-is-the-effect-of-adding-Adversarial-Training?">1. In terms of regression, compared to only use NLL loss with a single network, what is the effect of adding Adversarial Training?<a class="anchor-link" href="#1.-In-terms-of-regression,-compared-to-only-use-NLL-loss-with-a-single-network,-what-is-the-effect-of-adding-Adversarial-Training?">¶</a></h3><p><strong>Effect</strong> : It significantly improves robustness and prevents overfitting to the noise in the training data.</p>
+<ul>
+<li><strong>Smoothing:</strong> A single network trained with standard NLL often produces "overconfident" uncertainty estimates (very low variance) in regions slightly off the data manifold.</li>
+<li><strong>Robustness:</strong> AT generates perturbed examples ($x'$) that maximize loss and trains on them. This forces the network to smooth its predictive distribution, resulting in higher, more realistic uncertainty estimates in the immediate vicinity of the data points[cite: 53, 54].</li>
+</ul>
+<h3 id="2.-How-about-adding-ensembles-of-M-networks?">2. How about adding ensembles of M networks?<a class="anchor-link" href="#2.-How-about-adding-ensembles-of-M-networks?">¶</a></h3><p><strong>Effect:</strong> Ensembles allow us to estimate <strong>Epistemic Uncertainty</strong> (model uncertainty).</p>
+<ul>
+<li><strong>Capturing Uncertainty:</strong> A single network can only reliably capture aleatoric uncertainty (noise in the data). An ensemble captures the uncertainty of the model itself.</li>
+<li><strong>OOD Detection:</strong> In regions where training data is sparse (Out-of-Distribution), the random initialization of each network $m$ causes them to converge to different functions. While they may agree on the training data, they will disagree wildly in OOD regions.</li>
+<li><strong>Result:</strong> This disagreement leads to a high variance in the mixture distribution, effectively flagging unknown regions [cite: 60-64].</li>
+</ul>
+<h3 id="3.-How-is-the-number-of-networks,-M,-affecting-the-prediction-and-uncertainty-estimation?">3. How is the number of networks, M, affecting the prediction and uncertainty estimation?<a class="anchor-link" href="#3.-How-is-the-number-of-networks,-M,-affecting-the-prediction-and-uncertainty-estimation?">¶</a></h3><p><strong>Effect:</strong> Increasing $M$ improves approximation quality but with diminishing returns.</p>
+<ul>
+<li><strong>Accuracy:</strong> Generally, a larger $M$ leads to a more accurate mean prediction as it averages out errors from individual models.</li>
+<li><strong>Uncertainty Quality:</strong> As $M$ increases, the ensemble distribution $p(y|x)$ better approximates the true posterior predictive distribution. However, empirical studies (including the Deep Ensembles paper) suggest that a small number (e.g., $M=5$) is often sufficient to obtain well-calibrated uncertainty estimates.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Classification-on-toy-dataset-:">Classification on <a href="https://cs231n.github.io/neural-networks-case-study/">toy dataset</a> :<a class="anchor-link" href="#Classification-on-toy-dataset-:">¶</a></h2>
 </div>
 </div>
@@ -8447,6 +8514,36 @@ Indeed, the divergence measures the difference between total and data uncertaint
 <li>Where are the members of the ensemble the most diverse? Why?</li>
 <li>How does adversarial training affect the results? Why?</li>
 <li>Finally, it is valuable for us to know how long did it take you to complete this practical?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1.-Are-there-any-regions-where-the-network-makes-overconfident-predictions?">1. Are there any regions where the network makes overconfident predictions?<a class="anchor-link" href="#1.-Are-there-any-regions-where-the-network-makes-overconfident-predictions?">¶</a></h3><p><strong>Answer:</strong> Yes.</p>
+<ul>
+<li>Standard neural networks (without ensembles) tend to be overconfident (assigning close to 1.0 probability to a single class) in regions <strong>far away from the training data</strong> (the "background" regions in the plots).</li>
+<li>This happens because the decision boundaries typically extend linearly into infinity. If a point lies far away but on the "Class A" side of the boundary, the model is confident it is Class A, even though it has never seen data there.</li>
+</ul>
+<h3 id="2.-Where-is-the-ensemble-most-uncertain-(high-entropy)?-Why?">2. Where is the ensemble most uncertain (high entropy)? Why?<a class="anchor-link" href="#2.-Where-is-the-ensemble-most-uncertain-(high-entropy)?-Why?">¶</a></h3><p><strong>Answer:</strong> The ensemble is most uncertain at the <strong>decision boundaries</strong> (e.g., the space directly between the spiral arms).</p>
+<ul>
+<li>[cite_start]<strong>Metric:</strong> This corresponds to high <strong>Data Uncertainty</strong> [cite: 594-596].</li>
+<li><strong>Why:</strong> In these overlapping regions, the data naturally supports multiple classes (noise/ambiguity). Consequently, the predicted probabilities are split (e.g., 0.5/0.5), resulting in maximum Shannon entropy.</li>
+</ul>
+<h3 id="3.-Where-are-the-members-of-the-ensemble-the-most-diverse?-Why?">3. Where are the members of the ensemble the most diverse? Why?<a class="anchor-link" href="#3.-Where-are-the-members-of-the-ensemble-the-most-diverse?-Why?">¶</a></h3><p><strong>Answer:</strong> The members are most diverse in <strong>Out-of-Distribution (OOD)</strong> regions (e.g., the corners of the plot or large gaps between spirals).</p>
+<ul>
+<li>[cite_start]<strong>Metric:</strong> This corresponds to high <strong>Knowledge Uncertainty</strong> [cite: 598-599].</li>
+<li><strong>Why:</strong> Since there is no training data in these regions to constrain the parameters, the random initialization causes each ensemble member to draw its decision boundary differently. One model might classify a far-away point as Red, while another classifies it as Blue. This disagreement maximizes the Jensen-Shannon divergence.</li>
+</ul>
+<h3 id="4.-How-does-adversarial-training-affect-the-results?-Why?">4. How does adversarial training affect the results? Why?<a class="anchor-link" href="#4.-How-does-adversarial-training-affect-the-results?-Why?">¶</a></h3><p><strong>Answer:</strong> Adversarial training smoothes the decision boundaries and expands the regions of uncertainty.</p>
+<ul>
+<li><strong>Effect:</strong> It effectively "thickens" the decision boundary.</li>
+<li><strong>Why:</strong> By training on perturbed examples, the model is forced to be uncertain not just <em>on</em> the mathematical line separating classes, but also in the $\epsilon$-neighborhood around it. This prevents the model from making high-confidence predictions on points that are only marginally different from the training data.</li>
 </ul>
 </div>
 </div>
