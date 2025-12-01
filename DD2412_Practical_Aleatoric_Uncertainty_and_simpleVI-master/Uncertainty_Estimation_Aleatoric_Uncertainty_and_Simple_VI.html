@@ -9221,15 +9221,11 @@ $$\omega^* = \text{argmin}_{\omega} \left( D_{KL}(Q_{\omega}(\theta) || P(\theta
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="------Derivations-----">----- Derivations  ---<a class="anchor-link" href="#------Derivations-----">¶</a></h2><p>In Variational Inference, we minimize the Evidence Lower Bound (ELBO) loss,</p>
-$$\omega^* = \text{argmin}_{\omega} \left( D_{KL}(Q_{\omega}(\theta) || P(\theta)) - \mathbb{E}_{Q}[\log P(\mathcal{D}|\theta)] \right)$$<h4 id="KL-Divergence-Term">KL Divergence Term<a class="anchor-link" href="#KL-Divergence-Term">¶</a></h4><p>KL divergence between two diagonal Gaussians:</p>
-<ul>
-<li><strong>Prior:</strong> $P(\theta) = \mathcal{N}(0, a^2 I)$</li>
-<li><strong>Approximate Posterior:</strong> $Q_{\omega}(\theta) = \mathcal{N}(\mu, \sigma^2 I)$</li>
-</ul>
+$$\omega^* = \text{argmin}_{\omega} \left( D_{KL}(Q_{\omega}(\theta) || P(\theta)) - \mathbb{E}_{Q}[\log P(\mathcal{D}|\theta)] \right)$$<h4 id="KL-Divergence">KL Divergence<a class="anchor-link" href="#KL-Divergence">¶</a></h4><p>KL divergence between two diagonal gaussians, Prior: $P(\theta) = \mathcal{N}(0, a^2 I)$ and posterior: $Q_{\omega}(\theta) = \mathcal{N}(\mu, \sigma^2 I)$</p>
 <p>for single parameter dimension $j$, the KL divergence is:</p>
 $$D_{KL}(q_j||p_j) = \log\frac{\sigma_{prior}}{\sigma_{post}} + \frac{\sigma_{post}^2 + (\mu_{post} - \mu_{prior})^2}{2\sigma_{prior}^2} - \frac{1}{2}$$<p>Substituting ($\mu_{prior}=0, \sigma_{prior}=a$):</p>
-$$D_{KL} = \sum_{j=1}^{p} \left( \log(a) - \log(\sigma_j) + \frac{\sigma_j^2 + \mu_j^2}{2a^2} - \frac{1}{2} \right)$$<h4 id="Expected-Likelihood-Term">Expected Likelihood Term<a class="anchor-link" href="#Expected-Likelihood-Term">¶</a></h4><p>We assume a Gaussian likelihood with fixed noise variance $c^2=1$. For a single Monte Carlo sample $S=1$:</p>
-$$-\log P(y|x, \theta_s) = \frac{1}{2}(y - f_{\theta_s}(x))^2 + \text{const}$$<h4 id="Final-Objective-(Equation-10)">Final Objective (Equation 10)<a class="anchor-link" href="#Final-Objective-(Equation-10)">¶</a></h4>$$\mathcal{L}_{VI}(\omega) = \underbrace{\sum_{j=1}^{p} \left( \log \frac{a}{\sigma_j} + \frac{\sigma_j^2 + \mu_j^2}{2a^2} - \frac{1}{2} \right)}_{\text{KL Divergence (Complexity)}} + \underbrace{\sum_{i=1}^{n} \frac{1}{2}(y_i - f_{\theta_s}(x_i))^2}_{\text{Negative Log-Likelihood (Error)}}$$<p>*ChatGPT was used to convert hand-written equations to tex here.</p>
+$$D_{KL} = \sum_{j=1}^{p} \left( \log(a) - \log(\sigma_j) + \frac{\sigma_j^2 + \mu_j^2}{2a^2} - \frac{1}{2} \right)$$<h4 id="Likelihood-expected">Likelihood expected<a class="anchor-link" href="#Likelihood-expected">¶</a></h4><p>given fixed gaussian noise variance $c^2=1$, for a single Monte Carlo sample $S=1$:</p>
+$$-\log P(y|x, \theta_s) = \frac{1}{2}(y - f_{\theta_s}(x))^2 + \text{const}$$<h4 id="Final-objectice--">Final objectice -<a class="anchor-link" href="#Final-objectice--">¶</a></h4>$$\mathcal{L}_{VI}(\omega) = \underbrace{\sum_{j=1}^{p} \left( \log \frac{a}{\sigma_j} + \frac{\sigma_j^2 + \mu_j^2}{2a^2} - \frac{1}{2} \right)}_{\text{KL Divergence (Complexity)}} + \underbrace{\sum_{i=1}^{n} \frac{1}{2}(y_i - f_{\theta_s}(x_i))^2}_{\text{Negative Log-Likelihood (Error)}}$$<p>*ChatGPT was used to convert hand-written equations to tex here.</p>
 </div>
 </div>
 </div>
